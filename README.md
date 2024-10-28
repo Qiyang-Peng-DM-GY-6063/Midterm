@@ -21,3 +21,17 @@ I am deeply inspired by concept art and related readings. I appreciate how they 
 ![Reference_Invisible City](./InvisibleCity.jpg)
 ![Reference_Encounter of imagination](./Encounterofimagination.png)
 
+
+--------------------------------------------------------------------------
+
+#### Wk2 update:
+
+- List Pseudo-code
+- Find shader references 
+    - https://p5js.org/tutorials/intro-to-shaders/
+    - https://openprocessing.org/sketch/2388090
+    - https://openprocessing.org/sketch/2415994
+    - https://openprocessing.org/sketch/2399104
+    - https://openprocessing.org/sketch/2363626
+- Tried to implement shader example but facing some problems:
+    - TypeError: Argument 1 ('program') to WebGL2RenderingContext.useProgram must be an instance of WebGLProgram
