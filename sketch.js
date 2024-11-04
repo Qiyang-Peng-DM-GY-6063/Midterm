@@ -48,7 +48,7 @@ function draw() {
 
   // Draw buildings
   for (let b of buildings) {
-    let opacity = map(sin(b.opacityPhase), -1, 1, 50, 200);
+    let opacity = map(sin(b.opacityPhase), -1, 1, 10, 225);
     stroke(180, opacity);
     b.opacityPhase += b.fadeSpeed;
     drawBuilding(b.x, b.y, b.w, b.d, b.h);
