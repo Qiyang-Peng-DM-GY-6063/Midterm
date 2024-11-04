@@ -3,8 +3,7 @@
 // https://openprocessing.org/sketch/2399104
 
 let buildings = [];
-let numBuildings = 2000;
-let shaderOverlayInstance; 
+let numBuildings = 2400;
 
 let containerCenterX, containerCenterY;
 let containerSpeedX, containerSpeedY;
@@ -15,13 +14,13 @@ function setup() {
   // Generate buildings
   let mainCanvas = createCanvas(windowWidth, windowHeight);
   mainCanvas.position(0, 0);
-  mainCanvas.style('z-index', '1');
+  mainCanvas.style("z-index", "1");
   generateBuildings();
 
-  containerWidth = windowWidth / 1.5; 
-  containerHeight = windowHeight / 1.5; 
+  containerWidth = windowWidth / 1.5;
+  containerHeight = windowHeight / 1.5;
 
-  // Boundaries 
+  // Boundaries
   minX = 0;
   maxX = width;
   minY = 0;
@@ -31,16 +30,15 @@ function setup() {
   containerCenterY = random(minY, maxY);
 
   // Speed
-  containerSpeedX = random(0.3, 0.7); 
+  containerSpeedX = random(0.3, 0.7);
   containerSpeedY = random(0.3, 0.7);
 
   // Z-index
-  let container = select('#shader-container');
+  let container = select("#shader-container");
   container.size(containerWidth, containerHeight);
-  container.style('z-index', '2');
+  container.style("z-index", "2");
 
-  // Floating window for shader overlay
-  shaderOverlayInstance = createShaderOverlay();
+  createShaderWindow();
 }
 
 function draw() {
@@ -71,7 +69,7 @@ function draw() {
   let containerX = containerCenterX - containerWidth / 2;
   let containerY = containerCenterY - containerHeight / 2;
 
-  let container = select('#shader-container');
+  let container = select("#shader-container");
   container.position(containerX, containerY);
 }
 
@@ -103,13 +101,28 @@ function drawBuilding(x, y, w, d, h) {
   let backTopRight = createVector(x + w + d, y - h - d * 0.5);
 
   // Front
-  line(frontBottomLeft.x, frontBottomLeft.y, frontBottomRight.x, frontBottomRight.y);
-  line(frontBottomRight.x, frontBottomRight.y, frontTopRight.x, frontTopRight.y);
+  line(
+    frontBottomLeft.x,
+    frontBottomLeft.y,
+    frontBottomRight.x,
+    frontBottomRight.y
+  );
+  line(
+    frontBottomRight.x,
+    frontBottomRight.y,
+    frontTopRight.x,
+    frontTopRight.y
+  );
   line(frontTopRight.x, frontTopRight.y, frontTopLeft.x, frontTopLeft.y);
   line(frontTopLeft.x, frontTopLeft.y, frontBottomLeft.x, frontBottomLeft.y);
 
   // Side
-  line(frontBottomRight.x, frontBottomRight.y, backBottomRight.x, backBottomRight.y);
+  line(
+    frontBottomRight.x,
+    frontBottomRight.y,
+    backBottomRight.x,
+    backBottomRight.y
+  );
   line(backBottomRight.x, backBottomRight.y, backTopRight.x, backTopRight.y);
   line(backTopRight.x, backTopRight.y, frontTopRight.x, frontTopRight.y);
 
@@ -119,8 +132,8 @@ function drawBuilding(x, y, w, d, h) {
   line(backTopLeft.x, backTopLeft.y, backTopRight.x, backTopRight.y);
 }
 
-// Shader overlay window
-function createShaderOverlay() {
+// Shader overlay window - arrow function 
+function createShaderWindow() {
   return new p5((sketch) => {
     let theShader;
     let metaballs = [];
@@ -132,7 +145,8 @@ function createShaderOverlay() {
 
     sketch.setup = () => {
       // Get the size of the shader container
-      let container = sketch.select('#shader-container');
+      let container = sketch.select("#shader-container");
+      //elt - html element - getBoundingClientRect() - get the viewport data
       let rect = container.elt.getBoundingClientRect();
       let w = rect.width;
       let h = rect.height;
@@ -140,6 +154,7 @@ function createShaderOverlay() {
       sketch.createCanvas(w, h, sketch.WEBGL);
       sketch.noStroke();
 
+      //Credit to: Richard Bourne
       // Initialize metaballs
       for (let i = 0; i < 12; i++) {
         metaballs.push({
@@ -153,7 +168,7 @@ function createShaderOverlay() {
     };
 
     sketch.draw = () => {
-      if (!theShader) return; // Check if shader loaded successfully
+
       sketch.shader(theShader);
 
       theShader.setUniform("u_resolution", [sketch.width, sketch.height]);
@@ -176,38 +191,8 @@ function createShaderOverlay() {
       }
 
       // Set uniform
-      theShader.setUniform('u_metaballs', metaballsData);
-
-      sketch.rect(-sketch.width / 2, -sketch.height / 2, sketch.width, sketch.height);
+      theShader.setUniform("u_metaballs", metaballsData);
+      sketch.rect( - sketch.width / 2, - sketch.height / 2, sketch.width, sketch.height);
     };
-
-    // Handle window resizing
-    sketch.windowResized = () => {
-      let container = sketch.select('#shader-container');
-      let rect = container.elt.getBoundingClientRect();
-      let w = rect.width;
-      let h = rect.height;
-      sketch.resizeCanvas(w, h);
-    };
-  }, 'shader-container');
-}
-
-// resize to play with container
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-
-  containerWidth = windowWidth / 1.5;
-  containerHeight = windowHeight / 1.5;
-
-  minX = containerWidth;
-  maxX = width;
-  minY = containerHeight;
-  maxY = height - containerHeight;
-
-  //container stays within the window bounds
-  containerCenterX = constrain(containerCenterX, minX, maxX);
-  containerCenterY = constrain(containerCenterY, minY, maxY);
-
-  let container = select('#shader-container');
-  container.size(containerWidth, containerHeight);
+  }, "shader-container");
 }
