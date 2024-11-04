@@ -52,19 +52,17 @@ function draw() {
     drawBuilding(b.x, b.y, b.w, b.d, b.h);
   }
 
-  // Update container center position
-  containerCenterX += containerSpeedX;
-  containerCenterY += containerSpeedY;
-
-  // Bounce off walls
+  // Bounce off 
   if (containerCenterX <= minX || containerCenterX >= maxX) {
     containerSpeedX *= -1;
-    containerCenterX = constrain(containerCenterX, minX, maxX);
   }
   if (containerCenterY <= minY || containerCenterY >= maxY) {
     containerSpeedY *= -1;
-    containerCenterY = constrain(containerCenterY, minY, maxY);
   }
+
+  // Update container center position
+  containerCenterX += containerSpeedX;
+  containerCenterY += containerSpeedY;
 
   let containerX = containerCenterX - containerWidth / 2;
   let containerY = containerCenterY - containerHeight / 2;
@@ -108,20 +106,14 @@ function drawBuilding(x, y, w, d, h) {
     frontBottomRight.y
   );
   line(
-    frontBottomRight.x,
-    frontBottomRight.y,
-    frontTopRight.x,
-    frontTopRight.y
+    frontBottomRight.x,frontBottomRight.y,frontTopRight.x,frontTopRight.y
   );
   line(frontTopRight.x, frontTopRight.y, frontTopLeft.x, frontTopLeft.y);
   line(frontTopLeft.x, frontTopLeft.y, frontBottomLeft.x, frontBottomLeft.y);
 
   // Side
   line(
-    frontBottomRight.x,
-    frontBottomRight.y,
-    backBottomRight.x,
-    backBottomRight.y
+    frontBottomRight.x,frontBottomRight.y,backBottomRight.x,backBottomRight.y
   );
   line(backBottomRight.x, backBottomRight.y, backTopRight.x, backTopRight.y);
   line(backTopRight.x, backTopRight.y, frontTopRight.x, frontTopRight.y);
