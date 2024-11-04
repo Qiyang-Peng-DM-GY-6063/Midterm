@@ -42,8 +42,13 @@ I am deeply inspired by concept art and related readings. I appreciate how they 
 
 - Create the city generater - will fade and appear timely based
 - Create another floating window to show the shader (took a lot of time), since the city and the shader cannot be rendered together on the same canvas, especially when both of them are timely based
+- Create the bouncing effect of the container
 - Credit to Richard Bourne & VKS
     - https://openprocessing.org/sketch/994875
     - https://openprocessing.org/sketch/2399104
     - Create Metal ball interaction mainly based on Ricahrd Bourne's project
 - Change the color/ color fill logic
+
+Possible Next Step:
+- more interesting interaction with rezie
+- more interaction between the floating window and the background
