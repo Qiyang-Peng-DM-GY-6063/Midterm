@@ -35,3 +35,15 @@ I am deeply inspired by concept art and related readings. I appreciate how they 
     - https://openprocessing.org/sketch/2363626
 - Tried to implement shader example but facing some problems:
     - TypeError: Argument 1 ('program') to WebGL2RenderingContext.useProgram must be an instance of WebGLProgram
+
+--------------------------------------------------------------------------
+
+#### Wk3 update:
+
+- Create the city generater - will fade and appear timely based
+- Create another floating window to show the shader (took a lot of time), since the city and the shader cannot be rendered together on the same canvas, especially when both of them are timely based
+- Credit to Richard Bourne & VKS
+    - https://openprocessing.org/sketch/994875
+    - https://openprocessing.org/sketch/2399104
+    - Create Metal ball interaction mainly based on Ricahrd Bourne's project
+- Change the color/ color fill logic
